@@ -108,7 +108,7 @@ void setup() {
   }
 
   esp_sleep_enable_timer_wakeup((uint64_t)TIME_TO_SLEEP_SEC * uS_TO_S_FACTOR);
-  Serial.println("Entering deep sleep for 5 minutes...");
+  Serial.println("Entering deep sleep for 1 minute...");
   Serial.flush();
   
   esp_deep_sleep_start();
