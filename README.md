@@ -50,7 +50,7 @@ Battery ADC (transmitter only)	0
     │   CAT COLLAR       │  ───────────────────────>  │   HOME RECEIVER    │
     │  ESP32-C3 + GPS    │   AES-128 + random IV      │  ESP32-C3 + Wi-Fi  │
     │  CC1101 TX         │                            │  CC1101 RX         │
-    │  Deep sleep 5 min  │                            │  Web dashboard     │
+    │  Deep sleep 1 min  │                            │  Web dashboard     │
     └────────────────────┘                            └────────────────────┘
 
 Transmitter cycle:
