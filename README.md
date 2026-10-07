@@ -3,23 +3,23 @@
 A long-range, battery-efficient cat tracking system built on ESP32-C3 Super Mini boards paired with CC1101 433 MHz radio modules. The transmitter rides on your cat's collar, periodically waking from deep sleep to grab a GPS fix and beam encrypted coordinates over the air. The receiver sits at home, decrypts incoming packets, and serves a live web dashboard over your local Wi-Fi network — no cloud, no subscriptions, no cellular data required.
 ## ✨ Features
 
-    Fully off-grid RF link — 433.92 MHz CC1101 OOK modulation, no internet or cellular needed for tracking
+Fully off-grid RF link — 433.92 MHz CC1101 OOK modulation, no internet or cellular needed for tracking
 
-    AES-128 encrypted packets with per-packet random IVs
+AES-128 encrypted packets with per-packet random IVs
 
-    Ultra-low power transmitter — deep sleeps between transmissions (default: every 5 minutes)
+Ultra-low power transmitter — deep sleeps between transmissions (default: every 1 minute)
 
-    Battery monitoring on the collar with percentage reporting
+Battery monitoring on the collar with percentage reporting
 
-    Live Leaflet.js map dashboard hosted directly on the receiver
+Live Leaflet.js map dashboard hosted directly on the receiver
 
-    Captive-style Wi-Fi setup portal — no hardcoded credentials; configure via a browser on first boot
+Captive-style Wi-Fi setup portal — no hardcoded credentials; configure via a browser on first boot
 
-    mDNS support — access the dashboard at http://cc1101.local
+mDNS support — access the dashboard at http://cc1101.local
 
-    Signal quality indicator (RSSI-based) and offline detection on the dashboard
+Signal quality indicator (RSSI-based) and offline detection on the dashboard
 
-    Auto-recovery — bad Wi-Fi credentials trigger a reset back into setup mode
+Auto-recovery — bad Wi-Fi credentials trigger a reset back into setup mode
 
 ## 🧰 Hardware
 Transmitter (Collar Unit)
@@ -43,15 +43,15 @@ SPI CS (CC1101)	1
 GPS RX (transmitter only)	20
 GPS TX (transmitter only)	21
 Battery ADC (transmitter only)	0
-#📡 How It Works
-text
 
-┌────────────────────┐         433.92 MHz         ┌────────────────────┐
-│   CAT COLLAR       │  ───────────────────────▶  │   HOME RECEIVER    │
-│  ESP32-C3 + GPS    │   AES-128 + random IV      │  ESP32-C3 + Wi-Fi  │
-│  CC1101 TX         │                            │  CC1101 RX         │
-│  Deep sleep 5 min  │                            │  Web dashboard     │
-└────────────────────┘                            └────────────────────┘
+## 📡 How It Works
+
+    ┌────────────────────┐         433.92 MHz         ┌────────────────────┐
+    │   CAT COLLAR       │  ───────────────────────>  │   HOME RECEIVER    │
+    │  ESP32-C3 + GPS    │   AES-128 + random IV      │  ESP32-C3 + Wi-Fi  │
+    │  CC1101 TX         │                            │  CC1101 RX         │
+    │  Deep sleep 5 min  │                            │  Web dashboard     │
+    └────────────────────┘                            └────────────────────┘
 
 Transmitter cycle:
 
@@ -114,14 +114,12 @@ Board support: ESP32 Arduino Core (tested with ESP32-C3 Super Mini).
 
 4. Open the dashboard
 
-Once reconnected, browse to:
-text
+    Once reconnected, browse to: 
+    http://cc1101.local
 
-http://cc1101.local
+    You'll see the live map, last-known coordinates, battery level, signal strength, and a "last signal" age counter.
 
-You'll see the live map, last-known coordinates, battery level, signal strength, and a "last signal" age counter.
-
-    ⚠️ Both units must share the same aes_key array. Change it from the default before deploying.
+        ⚠️ Both units must share the same aes_key array. Change it from the default before deploying.
 
 ## 🔐 Security Notes
 
